@@ -5,8 +5,13 @@ const Layout = () => {
       <h1>My App</h1>
       <ul>
         <li>
-          <Link to={""}></Link>
+          <Link to={"/"}>Home</Link>
+        </li>
+        <li>
           <Link to={"/add"}>Add Product</Link>
+        </li>
+        <li>
+          {" "}
           <Link to={"/edit"}>Edit the Product</Link>
         </li>
       </ul>
