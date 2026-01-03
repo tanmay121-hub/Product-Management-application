@@ -1,4 +1,4 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
 import Layout from "../Layout";
 import Home from "../pages/Products";
 import EditProduct from "../pages/EditProduct";
@@ -11,16 +11,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Products />,
+        element: <Navigate to={"/products"} />,
       },
+      { path: "/products", element: <Products /> },
       {
         path: "/add",
         element: <AddProduct />,
       },
-      {
-        path: "/edit",
-        element: <EditProduct />,
-      },
+      { path: "/edit", element: <div>Please select a product to edit.</div> },
+      { path: "/edit/:id", element: <EditProduct /> },
     ],
   },
 ]);

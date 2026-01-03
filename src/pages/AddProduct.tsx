@@ -1,8 +1,10 @@
 import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import type { Product } from "./interface/Product";
+import { useNavigate } from "react-router-dom";
 
 export const AddProduct = () => {
+  const navigate = useNavigate();
   const [product, setProduct] = useState<Omit<Product, "id">>({
     name: "",
     price: 0,
@@ -13,8 +15,8 @@ export const AddProduct = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    setProduct((prev) => ({
-      ...prev,
+    setProduct(() => ({
+      ...product,
       [name]: name === "price" ? Number(value) : value,
     }));
   };
@@ -80,7 +82,11 @@ export const AddProduct = () => {
           />
         </div>
         <div style={{ marginTop: 12 }}>
-          <Button type="submit" variant="contained">
+          <Button
+            type="submit"
+            onClick={() => navigate("/products")}
+            variant="contained"
+          >
             Add
           </Button>
         </div>
