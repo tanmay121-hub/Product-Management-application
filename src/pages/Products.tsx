@@ -21,7 +21,7 @@ const Products = () => {
             {product.name}
             {product.price}
             {product.category}
-            <Link to={`/edit-product/${product.id}`}>Edit</Link>
+            <Link to={`/edit/${product.id}`}>Edit</Link>
             <Button
               onClick={() => deleteProduct(product.id)}
               variant="contained"
