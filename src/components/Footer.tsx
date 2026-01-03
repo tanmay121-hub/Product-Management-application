@@ -1,6 +1,5 @@
 // Footer.tsx
 import React from "react";
-import { Link } from "react-router-dom";
 
 const styles: Record<string, React.CSSProperties> = {
   footer: {
