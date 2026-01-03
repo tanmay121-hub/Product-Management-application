@@ -3,22 +3,27 @@ import Layout from "../Layout";
 import EditProduct from "../pages/EditProduct";
 import { AddProduct } from "../pages/AddProduct";
 import Products from "../pages/Products";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import RequireAuth from "../auth/RequireAuth";
 
 const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <Signup /> },
+
+      // protected
       {
-        path: "/",
-        element: <Navigate to={"/products"} />,
+        element: <RequireAuth />,
+        children: [
+          { path: "/", element: <Navigate to="/products" /> },
+          { path: "/products", element: <Products /> },
+          { path: "/add", element: <AddProduct /> },
+          { path: "/edit/:id", element: <EditProduct /> },
+        ],
       },
-      { path: "/products", element: <Products /> },
-      {
-        path: "/add",
-        element: <AddProduct />,
-      },
-      { path: "/edit", element: <div>Please select a product to edit.</div> },
-      { path: "/edit/:id", element: <EditProduct /> },
     ],
   },
 ]);

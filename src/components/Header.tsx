@@ -1,7 +1,10 @@
 // Header.tsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { getAuthUser, logout } from "../utils/storage";
 
+import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 const styles: Record<string, React.CSSProperties> = {
   header: {
     position: "sticky",
@@ -74,6 +77,8 @@ const styles: Record<string, React.CSSProperties> = {
 
 const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(getAuthUser());
 
   // treat edit page as part of "Products" section
   const isProductsActive =
@@ -83,12 +88,18 @@ const Header = () => {
     ...styles.pill,
     ...(active ? styles.pillActive : {}),
   });
-
+  useEffect(() => {
+    setUser(getAuthUser());
+  }, [location.pathname]);
+  const handleLogout = () => {
+    logout();
+    setUser(null);
+    navigate("/login");
+  };
   return (
     <header style={styles.header}>
       <div style={styles.inner}>
         <Link to="/products" style={styles.brand}>
-          <span style={styles.logo} />
           <span style={styles.brandText}>
             <p style={styles.title}>My App</p>
             <p style={styles.subtitle}>Product Manager</p>
@@ -109,6 +120,15 @@ const Header = () => {
           >
             + Add Product
           </Link>
+          {user ? (
+            <Button onClick={handleLogout} style={styles.pill}>
+              Logout
+            </Button>
+          ) : (
+            <Link to="/login" style={styles.pill}>
+              Login
+            </Link>
+          )}
         </nav>
       </div>
     </header>
