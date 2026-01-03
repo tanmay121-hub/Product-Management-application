@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import type { Product } from "./interface/Product";
+import Grid from "@mui/material/Grid";
 import {
   Box,
   Button,
@@ -8,7 +9,6 @@ import {
   CardContent,
   CardMedia,
   Container,
-  Grid,
   Stack,
   Typography,
   Divider,
@@ -78,7 +78,7 @@ const Products = () => {
       ) : (
         <Grid container spacing={2}>
           {products.map((product) => (
-            <Grid item xs={12} sm={6} md={4} key={product.id}>
+            <div>
               <Card
                 variant="outlined"
                 sx={{
@@ -139,7 +139,7 @@ const Products = () => {
                   </Button>
                 </CardActions>
               </Card>
-            </Grid>
+            </div>
           ))}
         </Grid>
       )}
